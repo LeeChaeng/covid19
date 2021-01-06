@@ -22,17 +22,17 @@ export default function Card({ title, today, total, color }: CardProps) {
 }
 
 const Block = styled.li<{ color: string }>`
-  background-color: white;
+  background-color: beige;
   padding: 10px;
   display: block;
   text-align: center;
   width: 80px;
   color: ${(props) => props.color};
-  &:not(:first-child) {
+  /* &:not(:first-child) {
     border-left-color: rgb(237, 240, 242);
     border-left-style: solid;
     border-left-width: 1px;
-  }
+  } */
   & > .title {
     margin: 0;
     font-size: 1.3rem;

@@ -16,5 +16,5 @@ const Container = styled.div`
   height: 100vh;
   width: 400px;
   margin: 0 auto;
-  background-color: beige;
+  background-color: white;
 `;
