@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import Card from "./Card";
-import axios from "axios";
+import BarChart from "./BarChart";
+
 import useAxios from "../hooks/useAxios";
 
 import { faHome, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import LineChart from "./LineChart";
+import axios from "axios";
 
 type ContriesData = {
   updated: number;
@@ -44,16 +47,16 @@ const Status = () => {
   const { data, loading, error } = useAxios<ContriesData>(
     "https://disease.sh/v3/covid-19/countries/KR"
   );
-  console.log(data);
 
   const getData = async () => {
-    const temp = await axios.get(
-      "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=uyCZ53eE%2B7NdfTQ%2FJGP%2FWTGdP9cWxaiWPA7BOQrjdlA9gedNSKI%2FeBkHPJ%2BK5y0yLbHXLYXAVKBTdU8aqz5AGQ%3D%3D&pageNo=1&numOfRows=10&startCreateDt=20201231&endCreateDt=20210101"
+    let dd = await axios.get(
+      "/korea/country/new/?serviceKey=73c2feb522af20d648a4438e7012568ca"
     );
-    console.log(temp);
+    console.log(dd.data);
   };
 
   getData();
+
   return (
     <>
       <FontAwesomeIcon icon={faHome} />
@@ -80,8 +83,12 @@ const Status = () => {
           color={"black"}
         />
       </Block>
-      <Block>막대 일별 확진자 그래프</Block>
-      <Block>꺾은선 누적 확진자수 그래프</Block>
+      <Block>
+        <BarChart />
+      </Block>
+      <Block>
+        <LineChart />
+      </Block>
       <Block>지역별 차트(?) 표</Block>
     </>
   );
