@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import Card from "./Card";
-import BarChart from "./BarChart";
 
 import useAxios from "../hooks/useAxios";
 
 import { faHome, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import LineChart from "./LineChart";
 import axios from "axios";
 
 type ContriesData = {
@@ -83,13 +81,6 @@ const Status = () => {
           color={"black"}
         />
       </Block>
-      <Block>
-        <BarChart />
-      </Block>
-      <Block>
-        <LineChart />
-      </Block>
-      <Block>지역별 차트(?) 표</Block>
     </>
   );
 };
