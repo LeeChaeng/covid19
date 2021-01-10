@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import styled from "styled-components";
 import useAxios from "../hooks/useAxios";
 import Chart from "react-apexcharts";
+import { numberWithComma } from "../utils/numberWithComma";
 
 type HistoricalData = {
   country: string;
@@ -74,6 +75,35 @@ export default function BarChart() {
               opacityTo: 1,
               stops: [0, 100],
               colorStops: [],
+            },
+          },
+          plotOptions: {
+            bar: {
+              dataLabels: {
+                position: "top", // top, center, bottom
+              },
+            },
+          },
+          dataLabels: {
+            enabled: true,
+            formatter: function (val: number) {
+              return numberWithComma(val);
+            },
+            offsetY: -20,
+            style: {
+              fontSize: "12px",
+              colors: ["#304758"],
+            },
+          },
+          yaxis: {
+            axisBorder: {
+              show: false,
+            },
+            axisTicks: {
+              show: false,
+            },
+            labels: {
+              show: false,
             },
           },
         }}

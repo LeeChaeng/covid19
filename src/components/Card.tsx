@@ -22,7 +22,7 @@ export default function Card({ title, today, total, color }: CardProps) {
 
 const Block = styled.li<{ color: string }>`
   border-radius: 10px;
-  box-shadow: 4px 1px 10px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 9px 10px 30px -1px rgba(0, 0, 0, 0.13);
   padding: 10px;
   display: block;
   text-align: center;
