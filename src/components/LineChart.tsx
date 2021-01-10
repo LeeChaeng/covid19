@@ -68,7 +68,7 @@ class LineChart extends React.Component {
   render() {
     return (
       <ChartBlock>
-        <h1>막대 일별 확진자 그래프</h1>
+        <h1>꺾은선 총 확진자수 증가 추이</h1>
         <Chart
           options={this.state.options}
           series={this.state.series}

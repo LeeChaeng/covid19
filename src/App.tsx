@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Status from "./components/Status";
 import BarChart from "./components/BarChart";
 import LineChart from "./components/LineChart";
+import CountryBoard from "./components/CountryBoard";
+import axios from "axios";
 
 function App() {
   return (
@@ -10,7 +12,7 @@ function App() {
       <Status />
       <BarChart />
       <LineChart />
-      지역별 차트(?) 표
+      <CountryBoard />
     </Container>
   );
 }

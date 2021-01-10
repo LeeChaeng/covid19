@@ -6,9 +6,8 @@ import useAxios from "../hooks/useAxios";
 
 import { faHome, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
 
-type ContriesData = {
+type KoreaData = {
   updated: number;
   country: string;
   countryInfo: {
@@ -42,18 +41,9 @@ type ContriesData = {
 };
 
 const Status = () => {
-  const { data, loading, error } = useAxios<ContriesData>(
+  const { data, loading, error } = useAxios<KoreaData>(
     "https://disease.sh/v3/covid-19/countries/KR"
   );
-
-  const getData = async () => {
-    let dd = await axios.get(
-      "/korea/country/new/?serviceKey=73c2feb522af20d648a4438e7012568ca"
-    );
-    console.log(dd.data);
-  };
-
-  getData();
 
   return (
     <>

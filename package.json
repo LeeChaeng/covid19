@@ -54,6 +54,5 @@
   "devDependencies": {
     "@types/styled-components": "^5.1.7"
   },
-  "proxy": "https://api.corona-19.kr/",
   "homepage": "https://leechaeng.github.io/covid19/"
 }
