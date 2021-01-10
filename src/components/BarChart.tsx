@@ -1,88 +1,98 @@
-import React, { Component } from "react";
-import Chart from "react-apexcharts";
+import React, { useMemo } from "react";
 import styled from "styled-components";
+import useAxios from "../hooks/useAxios";
+import Chart from "react-apexcharts";
 
-import axios from "axios";
-
-class BarChart extends Component {
-  state = {
-    options: {
-      chart: {
-        id: "basic-bar",
-      },
-      xaxis: {
-        categories: [],
-      },
-    },
-    series: [
-      {
-        name: "확진자수",
-        data: [],
-      },
-    ],
+type HistoricalData = {
+  country: string;
+  province: string[];
+  timeline: {
+    cases: {
+      [key: string]: number;
+    };
+    deaths: {
+      [key: string]: number;
+    };
+    recovered: {
+      [key: string]: number;
+    };
   };
+};
 
-  getData = async () => {
-    const res = await axios.get(
-      "https://disease.sh/v3/covid-19/historical/KR?lastdays=8"
-    );
+export default function BarChart() {
+  const { data } = useAxios<HistoricalData>(
+    "https://disease.sh/v3/covid-19/historical/KR?lastdays=8"
+  );
 
-    let key = [];
-    let value = [];
-    let temp_value = [];
+  const { key, value } = useMemo<{ key: string[]; value: number[] }>(() => {
+    const key: string[] = [];
+    const value: number[] = [];
+    const temp_value: number[] = [];
+    if (!data) {
+      return { key, value };
+    }
 
-    for (let i in res.data.timeline.cases) {
-      //   console.log(i + " : " + res.data.timeline.cases[i]);
+    for (let i in data.timeline.cases) {
       key.push(i.substring(0, i.length - 3));
-      temp_value.push(res.data.timeline.cases[i]);
+      temp_value.push(data.timeline.cases[i]);
     }
 
     key.splice(0, 1);
-    for (let i = 0; i < temp_value.length; i++) {
-      if (i === 0) {
-        continue;
-      }
+    for (let i = 1; i < temp_value.length; i++) {
       value.push(temp_value[i] - temp_value[i - 1]);
     }
 
-    this.setState({
-      options: {
-        xaxis: {
-          categories: key,
-        },
-      },
-      series: [
-        {
-          data: value,
-        },
-      ],
-    });
-  };
+    return { key, value };
+  }, [data]);
 
-  componentDidMount() {
-    this.getData();
-  }
-
-  render() {
-    return (
-      <ChartBlock>
-        <h1>막대 일별 확진자 그래프</h1>
-        <Chart
-          options={this.state.options}
-          series={this.state.series}
-          type="bar"
-          width="400px"
-        />
-      </ChartBlock>
-    );
-  }
+  return (
+    <ChartWrapper>
+      <h1>막대 일별 확진자 그래프</h1>
+      <Chart
+        options={{
+          chart: {
+            id: "basic-bar",
+          },
+          xaxis: {
+            categories: key,
+          },
+          grid: {
+            row: {
+              colors: ["#fff", "#f2f2f2"],
+            },
+            borderColor: "#transparent",
+          },
+          fill: {
+            colors: ["#265e9077"],
+            type: "gradient",
+            gradient: {
+              shade: "dark",
+              type: "vertical",
+              shadeIntensity: 1,
+              gradientToColors: ["#6b266abb"], // optional, if not defined - uses the shades of same color in series
+              opacityFrom: 1,
+              opacityTo: 1,
+              stops: [0, 100],
+              colorStops: [],
+            },
+          },
+        }}
+        series={[
+          {
+            name: "확진자수",
+            data: value,
+          },
+        ]}
+        type="bar"
+        width="400px"
+      />
+    </ChartWrapper>
+  );
 }
 
-const ChartBlock = styled.div`
+const ChartWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-
-export default BarChart;

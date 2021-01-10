@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import { numberWithComma } from "../utils/numberWithComma";
+
 type CountryProps = {
   name: string | undefined;
   cases: number;
@@ -14,7 +16,7 @@ const Country = ({ name, cases, flag }: CountryProps) => {
         <Img src={flag} alt={name} />
         {name}
       </div>
-      <div>{cases}</div>
+      <div>{numberWithComma(cases)}</div>
     </Block>
   );
 };

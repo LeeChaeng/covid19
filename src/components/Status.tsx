@@ -3,9 +3,7 @@ import styled from "styled-components";
 import Card from "./Card";
 
 import useAxios from "../hooks/useAxios";
-
-import { faHome, faBars } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Header from "./Header";
 
 type KoreaData = {
   updated: number;
@@ -46,11 +44,8 @@ const Status = () => {
   );
 
   return (
-    <>
-      <FontAwesomeIcon icon={faHome} />
-      <span>Covid 19</span>
-      <FontAwesomeIcon icon={faBars} />
-      <h1>투데이 코로나</h1>
+    <Container>
+      <Header />
       <Block>
         <Card
           title="확진자"
@@ -71,15 +66,19 @@ const Status = () => {
           color={"black"}
         />
       </Block>
-    </>
+    </Container>
   );
 };
 
 export default Status;
 
+const Container = styled.div`
+  padding: 30px;
+  padding-bottom: 0px;
+`;
 const Block = styled.ul`
   display: flex;
   justify-content: space-between;
   list-style-type: none;
-  padding: 0;
+  padding: 30px 0px;
 `;
