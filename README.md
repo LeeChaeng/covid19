@@ -14,6 +14,7 @@
 ## 사용 기술
 
 - React.js
+- Typescript
 - styled-component
 - apex chart
 - git pages
