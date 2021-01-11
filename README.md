@@ -6,6 +6,10 @@
 
 ### 디자이너 : 노아정 (thsu2048@naver.com)
 
+## demo page
+
+- https://leechaeng.github.io/covid19/
+
 ## 사용 API
 
 - disease.sh
