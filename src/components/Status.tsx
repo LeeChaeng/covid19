@@ -74,8 +74,9 @@ export default Status;
 
 const Container = styled.div`
   padding: 30px;
-  padding-bottom: 0px;
+  padding-bottom: 20px;
 `;
+
 const Block = styled.ul`
   display: flex;
   justify-content: space-between;

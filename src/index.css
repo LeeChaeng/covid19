@@ -2,17 +2,49 @@ html {
   font-size: 10px;
 }
 
+@font-face {
+  font-family: "SCDream_light";
+  src: url("../src/static/fonts/SCDream3.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "SCDream_normal";
+  src: url("../src/static/fonts/SCDream4.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "SCDream_bold";
+  src: url("../src/static/fonts/SCDream5.otf") format("opentype");
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕",
-    helvetica, "Apple SD Gothic Neo", helvetica, "나눔바른고딕 옛한글",
-    "NanumBarunGothic YetHangul", sans-serif;
+  font-family: "SCDream_normal";
+  /* font-family: "SCDream_normal" -apple-system, BlinkMacSystemFont,
+    "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo", helvetica,
+    "나눔바른고딕 옛한글", "NanumBarunGothic YetHangul", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f9fafb;
+  background-color: #f9fafb; */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+tooltip {
+  display: flex;
+  flex-direction: column;
+}
+
+.tooltip__date {
+  display: flex;
+}
+
+.tooltip__cases {
+  display: flex;
+  flex-direction: column;
+  background-color: #6b266a;
+  color: #ffffff;
 }

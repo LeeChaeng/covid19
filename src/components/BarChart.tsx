@@ -48,11 +48,14 @@ export default function BarChart() {
 
   return (
     <ChartWrapper>
-      <h1>막대 일별 확진자 그래프</h1>
+      <h1>일별 확진자 그래프</h1>
       <Chart
         options={{
           chart: {
             id: "basic-bar",
+            toolbar: {
+              show: false,
+            },
           },
           xaxis: {
             categories: key,
@@ -79,6 +82,7 @@ export default function BarChart() {
           },
           plotOptions: {
             bar: {
+              columnWidth: "60%",
               dataLabels: {
                 position: "top", // top, center, bottom
               },
@@ -91,8 +95,9 @@ export default function BarChart() {
             },
             offsetY: -20,
             style: {
-              fontSize: "12px",
-              colors: ["#304758"],
+              fontFamily: "SCDream_light",
+              fontSize: "12.5px",
+              colors: ["#650D5F"],
             },
           },
           yaxis: {
@@ -104,6 +109,30 @@ export default function BarChart() {
             },
             labels: {
               show: false,
+            },
+            tickAmount: 8,
+          },
+          tooltip: {
+            custom: ({
+              dataPointIndex,
+              series,
+              seriesIndex,
+            }: {
+              dataPointIndex: number;
+              series: number[][];
+              seriesIndex: number;
+            }) => {
+              const [month, day] = key[dataPointIndex].split("/");
+              const value = series[seriesIndex][dataPointIndex];
+              return `<div class="tooltip>
+                  <div class="tooltip__date">${month}월 ${day}일</div>
+                  <div class="tooltip__cases">
+                    <span class="tooltip__cases__title">확진자 수</span>
+                    <span class="tooltip__cases__value">${numberWithComma(
+                      value
+                    )}<span>
+                  </div>
+                </div>`;
             },
           },
         }}
@@ -122,7 +151,11 @@ export default function BarChart() {
 
 const ChartWrapper = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  & > h1 {
+    margin-left: 30px;
+    margin-bottom: 0px;
+    font-family: "SCDream_bold";
+  }
 `;
+
+const Tooltip = styled.div``;

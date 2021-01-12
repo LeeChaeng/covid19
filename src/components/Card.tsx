@@ -23,26 +23,32 @@ export default function Card({ title, today, total, color }: CardProps) {
 const Block = styled.li<{ color: string }>`
   border-radius: 10px;
   box-shadow: 9px 10px 30px -1px rgba(0, 0, 0, 0.13);
-  padding: 10px;
+  padding: 8px;
   display: block;
   text-align: center;
-  width: 80px; /* color: ${(props) => props.color}; */
+  width: 86px; /* color: ${(props) => props.color}; */
   /* &:not(:first-child) {
     border-left-color: rgb(237, 240, 242);
     border-left-style: solid;
     border-left-width: 1px;
   } */
   & > .title {
+    font-family: "SCDream_light";
     margin: 0;
-    font-size: 1.3rem;
+    font-size: 12px;
     line-height: 1.8rem;
     letter-spacing: -0.8px;
   }
 
   & > .today {
-    font-size: 1.8rem;
+    font-size: 22px;
     line-height: 2.2rem;
     font-weight: bold;
     letter-spacing: -0.4px;
+  }
+
+  & > .total {
+    font-family: "SCDream_light";
+    font-size: 8px;
   }
 `;

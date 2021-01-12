@@ -42,26 +42,9 @@ const CountryBoard = () => {
     "https://disease.sh/v3/covid-19/countries?sort=cases"
   );
 
-  if (data !== null) {
-    data.map((cur) => {
-      console.log(cur["country"]);
-      console.log(
-        ISO.find(
-          (iso) =>
-            iso.code === cur["countryInfo"]["iso2"] ||
-            iso.name === cur["country"]
-        )?.korName
-      );
-    });
-    // console.log(data[0]);
-    //넘겨주어야 하는 데이터 국기, 나라명, 총확진자수, 오늘 확진자수
-    // cur["country"], cur["countryInfo"]["iso2"]
-  }
-
   return (
     <Block>
       <h1>전세계 확진자 수</h1>
-
       <Title>
         <div>나라</div>
         <div>총 확진자수</div>
@@ -91,7 +74,6 @@ const CountryBoard = () => {
 
 const Block = styled.div`
   height: 200px;
-  background-color: red;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -110,7 +92,7 @@ const Container = styled.div`
   height: 120px;
   font-size: 13px;
   border: solid black 1px;
-  overflow: scroll;
+  overflow-y: scroll;
 `;
 
 export default CountryBoard;
