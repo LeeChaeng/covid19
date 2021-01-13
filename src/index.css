@@ -33,18 +33,38 @@ code {
     monospace;
 }
 
-tooltip {
+.tooltip {
   display: flex;
   flex-direction: column;
+  width: 90px;
 }
 
 .tooltip__date {
   display: flex;
+  justify-content: center;
+  color: #a9a9ab;
+  font-size: 12px;
+  padding: 3px 0px;
 }
 
 .tooltip__cases {
   display: flex;
   flex-direction: column;
+  align-items: center;
   background-color: #6b266a;
   color: #ffffff;
+  padding: 2px 0px;
+}
+
+.tooltip__cases__title {
+  font-size: 10px;
+}
+
+.tooltip__cases__value {
+  font-size: 15px;
+}
+
+.apexcharts-tooltip {
+  border: none !important;
+  border-radius: 10px !important;
 }

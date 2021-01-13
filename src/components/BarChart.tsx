@@ -59,6 +59,12 @@ export default function BarChart() {
           },
           xaxis: {
             categories: key,
+            labels: {
+              style: {
+                colors: "#6d6b6c",
+                fontSize: "14px",
+              },
+            },
           },
           grid: {
             row: {
@@ -124,7 +130,7 @@ export default function BarChart() {
             }) => {
               const [month, day] = key[dataPointIndex].split("/");
               const value = series[seriesIndex][dataPointIndex];
-              return `<div class="tooltip>
+              return `<div class="tooltip">
                   <div class="tooltip__date">${month}월 ${day}일</div>
                   <div class="tooltip__cases">
                     <span class="tooltip__cases__title">확진자 수</span>

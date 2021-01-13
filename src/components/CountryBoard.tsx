@@ -51,8 +51,9 @@ const CountryBoard = () => {
       </Title>
       <Container>
         {data !== null ? (
-          data.map((cur) => (
+          data.map((cur, idx) => (
             <Country
+              key={idx}
               name={
                 ISO.find(
                   (iso) =>
