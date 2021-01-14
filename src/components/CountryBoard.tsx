@@ -88,6 +88,7 @@ const Block = styled.div`
   height: 200px;
   display: flex;
   flex-direction: column;
+  padding-bottom: 30px;
   & > h1 {
     margin-left: 23px;
     margin-bottom: 10px;
