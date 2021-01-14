@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import Chart from "react-apexcharts";
-import axios from "axios";
+import { numberWithComma } from "../utils/numberWithComma";
 import styled from "styled-components";
 import useAxios from "../hooks/useAxios";
 
@@ -46,14 +46,81 @@ export default function LineChart() {
 
   return (
     <ChartWrapper>
-      <h1>꺾은선 총 확진자수 증가 추이</h1>
+      <h1>총 확진자수 증가 추이</h1>
       <Chart
         options={{
           chart: {
             id: "basic-bar",
+            toolbar: {
+              show: false,
+            },
           },
+          colors: ["#884884"],
           xaxis: {
             categories: key,
+            hideOverlappingLabels: true,
+            axisBorder: {
+              show: false,
+            },
+            axisTicks: {
+              show: false,
+            },
+            labels: {
+              rotate: 0,
+              rotateAlways: false,
+              trim: true,
+            },
+            tooltip: {
+              enabled: false,
+            },
+          },
+          yaxis: {
+            axisBorder: {
+              show: false,
+            },
+            axisTicks: {
+              show: false,
+            },
+            labels: {
+              show: false,
+            },
+            tickAmount: 6,
+          },
+          grid: {
+            row: {
+              colors: ["#f2f2f2", "#fff"],
+            },
+            borderColor: "#transparent",
+          },
+          markers: {
+            colors: "#650d5f",
+            strokeWidth: 2.5,
+            hover: {
+              size: 7,
+            },
+          },
+          tooltip: {
+            custom: ({
+              dataPointIndex,
+              series,
+              seriesIndex,
+            }: {
+              dataPointIndex: number;
+              series: number[][];
+              seriesIndex: number;
+            }) => {
+              const [month, day] = key[dataPointIndex].split("/");
+              const value = series[seriesIndex][dataPointIndex];
+              return `<div class="tooltip">
+                  <div class="tooltip__date">${month}월 ${day}일</div>
+                  <div class="tooltip__cases">
+                    <span class="tooltip__cases__title">확진자 수</span>
+                    <span class="tooltip__cases__value">${numberWithComma(
+                      value
+                    )}명<span>
+                  </div>
+                </div>`;
+            },
           },
         }}
         series={[
@@ -71,7 +138,9 @@ export default function LineChart() {
 
 const ChartWrapper = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  & > h1 {
+    margin-left: 30px;
+    margin-bottom: 0px;
+    font-family: "SCDream_bold";
+  }
 `;

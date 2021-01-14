@@ -62,13 +62,24 @@ export default function BarChart() {
             labels: {
               style: {
                 colors: "#6d6b6c",
-                fontSize: "14px",
+                fontSize: "13px",
               },
+              formatter: (value: string) =>
+                `${String.fromCharCode(8403)} ${value} ${String.fromCharCode(
+                  8403
+                )}`,
+              offsetY: -4,
+            },
+            axisBorder: {
+              show: false,
+            },
+            axisTicks: {
+              show: false,
             },
           },
           grid: {
             row: {
-              colors: ["#fff", "#f2f2f2"],
+              colors: ["#f2f2f2", "#fff"],
             },
             borderColor: "#transparent",
           },
@@ -82,7 +93,7 @@ export default function BarChart() {
               gradientToColors: ["#6b266abb"], // optional, if not defined - uses the shades of same color in series
               opacityFrom: 1,
               opacityTo: 1,
-              stops: [0, 100],
+              stops: [0, 100, 150],
               colorStops: [],
             },
           },
@@ -136,7 +147,7 @@ export default function BarChart() {
                     <span class="tooltip__cases__title">확진자 수</span>
                     <span class="tooltip__cases__value">${numberWithComma(
                       value
-                    )}<span>
+                    )}명<span>
                   </div>
                 </div>`;
             },
@@ -163,5 +174,3 @@ const ChartWrapper = styled.div`
     font-family: "SCDream_bold";
   }
 `;
-
-const Tooltip = styled.div``;

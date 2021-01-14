@@ -19,13 +19,12 @@ html {
 
 body {
   margin: 0;
-  font-family: "SCDream_normal";
-  /* font-family: "SCDream_normal" -apple-system, BlinkMacSystemFont,
+  font-family: "SCDream_light", -apple-system, BlinkMacSystemFont,
     "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo", helvetica,
     "나눔바른고딕 옛한글", "NanumBarunGothic YetHangul", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f9fafb; */
+  background-color: #f9fafb;
 }
 
 code {
@@ -42,7 +41,7 @@ code {
 .tooltip__date {
   display: flex;
   justify-content: center;
-  color: #a9a9ab;
+  color: #6d6b6c;
   font-size: 12px;
   padding: 3px 0px;
 }
@@ -62,6 +61,7 @@ code {
 
 .tooltip__cases__value {
   font-size: 15px;
+  font-weight: bold;
 }
 
 .apexcharts-tooltip {
