@@ -169,7 +169,7 @@ export default function BarChart() {
 const ChartWrapper = styled.div`
   width: 100%;
   & > h1 {
-    margin-left: 30px;
+    margin-left: 23px;
     margin-bottom: 0px;
     font-family: "SCDream_bold";
   }

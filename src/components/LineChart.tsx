@@ -46,7 +46,7 @@ export default function LineChart() {
 
   return (
     <ChartWrapper>
-      <h1>총 확진자수 증가 추이</h1>
+      <h1>총 확진자수 증가 그래프</h1>
       <Chart
         options={{
           chart: {
@@ -139,7 +139,7 @@ export default function LineChart() {
 const ChartWrapper = styled.div`
   width: 100%;
   & > h1 {
-    margin-left: 30px;
+    margin-left: 23px;
     margin-bottom: 0px;
     font-family: "SCDream_bold";
   }

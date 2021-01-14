@@ -45,36 +45,57 @@ const CountryBoard = () => {
   return (
     <Block>
       <h1>전세계 확진자 수</h1>
-      <Title>
-        <div>나라</div>
-        <div>총 확진자수</div>
-      </Title>
-      <Container>
-        {data !== null ? (
-          data.map((cur, idx) => (
-            <Country
-              key={idx}
-              name={
-                ISO.find(
-                  (iso) =>
-                    iso.code === cur["countryInfo"]["iso2"] ||
-                    iso.name === cur["country"]
-                )?.korName
-              }
-              cases={cur["cases"]}
-              flag={cur["countryInfo"]["flag"]}
-            />
-          ))
-        ) : (
-          <div></div>
-        )}
-      </Container>
+      <Wrapper>
+        <Title>
+          <div>
+            <span className="divider"></span>
+            <span>국가</span>
+            <span className="divider"></span>
+          </div>
+          <div>
+            <span className="divider"></span>
+            <span>총 확진자수</span>
+            <span className="divider"></span>
+          </div>
+        </Title>
+        <Container>
+          {data !== null ? (
+            data.map((cur, idx) => (
+              <Country
+                key={idx}
+                name={
+                  ISO.find(
+                    (iso) =>
+                      iso.code === cur["countryInfo"]["iso2"] ||
+                      iso.name === cur["country"]
+                  )?.korName
+                }
+                cases={cur["cases"]}
+                flag={cur["countryInfo"]["flag"]}
+                backgroundColor={(idx + 1) % 2 ? "#efeded" : "white"}
+              />
+            ))
+          ) : (
+            <div></div>
+          )}
+        </Container>
+      </Wrapper>
     </Block>
   );
 };
 
 const Block = styled.div`
   height: 200px;
+  display: flex;
+  flex-direction: column;
+  & > h1 {
+    margin-left: 23px;
+    margin-bottom: 10px;
+    font-family: "SCDream_bold";
+  }
+`;
+
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,13 +107,27 @@ const Title = styled.div`
   justify-content: space-between;
   width: 350px;
   font-size: 13px;
+  padding: 5px 0px;
+  & > div {
+    width: 100px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  & > div > .divider {
+    display: inline-block;
+    width: 0;
+    height: 8px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+  }
 `;
 
 const Container = styled.div`
   width: 350px;
   height: 120px;
   font-size: 13px;
-  border: solid black 1px;
   overflow-y: scroll;
 `;
 
