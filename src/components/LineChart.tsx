@@ -1,90 +1,77 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Chart from "react-apexcharts";
 import axios from "axios";
 import styled from "styled-components";
+import useAxios from "../hooks/useAxios";
 
-class LineChart extends React.Component {
-  state = {
-    options: {
-      chart: {
-        id: "basic-bar",
-      },
-      xaxis: {
-        categories: [],
-      },
-    },
-    series: [
-      {
-        name: "확진자수",
-        data: [],
-      },
-    ],
+type HistoricalData = {
+  country: string;
+  province: string[];
+  timeline: {
+    cases: {
+      [key: string]: number;
+    };
+    deaths: {
+      [key: string]: number;
+    };
+    recovered: {
+      [key: string]: number;
+    };
   };
+};
 
-  getData = async () => {
-    const res = await axios.get(
-      "https://disease.sh/v3/covid-19/historical/KR?lastdays=all"
-    );
+export default function LineChart() {
+  const { data } = useAxios<HistoricalData>(
+    "https://disease.sh/v3/covid-19/historical/KR?lastdays=all"
+  );
 
-    let key = [];
-    let value = [];
-    let temp_value = [];
+  const { key, value } = useMemo<{ key: string[]; value: number[] }>(() => {
+    const key: string[] = [];
+    const value: number[] = [];
+    const temp_value: number[] = [];
+    if (!data) {
+      return { key, value };
+    }
 
-    for (let i in res.data.timeline.cases) {
-      //   console.log(i + " : " + res.data.timeline.cases[i]);
+    for (let i in data.timeline.cases) {
       key.push(i.substring(0, i.length - 3));
-      temp_value.push(res.data.timeline.cases[i]);
+      temp_value.push(data.timeline.cases[i]);
     }
 
     for (let i = 0; i < temp_value.length; i++) {
       value.push(temp_value[i]);
     }
+    return { key, value };
+  }, [data]);
 
-    this.setState({
-      options: {
-        xaxis: {
-          categories: key,
-          labels: {
-            show: true,
-            rotate: 10,
-            rotateAlways: false,
-            hideOverlappingLabels: true,
-            minHeight: 10,
+  return (
+    <ChartWrapper>
+      <h1>꺾은선 총 확진자수 증가 추이</h1>
+      <Chart
+        options={{
+          chart: {
+            id: "basic-bar",
           },
-        },
-      },
-      series: [
-        {
-          data: value,
-        },
-      ],
-    });
-  };
-
-  componentDidMount() {
-    this.getData();
-  }
-
-  render() {
-    return (
-      <ChartBlock>
-        <h1>꺾은선 총 확진자수 증가 추이</h1>
-        <Chart
-          options={this.state.options}
-          series={this.state.series}
-          type="line"
-          width="400px"
-        />
-      </ChartBlock>
-    );
-  }
+          xaxis: {
+            categories: key,
+          },
+        }}
+        series={[
+          {
+            name: "확진자수",
+            data: value,
+          },
+        ]}
+        type="line"
+        width="400px"
+      />
+    </ChartWrapper>
+  );
 }
 
-const ChartBlock = styled.div`
+const ChartWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-
-export default LineChart;
