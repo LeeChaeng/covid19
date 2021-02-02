@@ -38,9 +38,28 @@ type KoreaData = {
   criticalPerOneMillion: number;
 };
 
+const calIncrese = (
+  value: number | undefined,
+  preValue: number | undefined
+) => {
+  if (!(value && preValue)) {
+    return "-";
+  } else {
+    if (value > preValue) {
+      return "▲";
+    } else if (value < preValue) {
+      return "▼";
+    } else return "-";
+  }
+};
+
 const Status = () => {
-  const { data, loading, error } = useAxios<KoreaData>(
+  const { data } = useAxios<KoreaData>(
     "https://disease.sh/v3/covid-19/countries/KR"
+  );
+
+  const { data: yData } = useAxios<KoreaData>(
+    "https://disease.sh/v3/covid-19/countries/KR?yesterday=true&strict=true"
   );
 
   return (
@@ -51,19 +70,22 @@ const Status = () => {
           title="확진자"
           total={data?.cases}
           today={data?.todayCases}
-          color={"#e52c0c"}
+          color={"rgb(122,30,114)"}
+          updown={calIncrese(data?.todayCases, yData?.todayCases)}
         />
         <Card
           title="완치자"
           total={data?.recovered}
           today={data?.todayRecovered}
-          color={"#3567e0"}
+          color={"rgb(0,94,148)"}
+          updown={calIncrese(data?.todayRecovered, yData?.todayRecovered)}
         />
         <Card
           title="사망자"
           total={data?.deaths}
           today={data?.todayDeaths}
-          color={"black"}
+          color={"rgb(102,102,102)"}
+          updown={calIncrese(data?.todayDeaths, yData?.todayDeaths)}
         />
       </Block>
     </Container>
