@@ -21,3 +21,7 @@
 - styled-component
 - apex chart
 - git pages
+
+## velog 회고 포스팅
+
+https://velog.io/@lucid/Today-Corona-내가-보려고-만든-코로나-상황판

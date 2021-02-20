@@ -13,13 +13,23 @@ function useAxios<T = any>(url: string) {
   });
 
   useEffect(() => {
-    axios.get<T>(url).then((data) => {
-      setState((prev) => ({
-        ...prev,
-        loading: false,
-        data: data.data,
-      }));
-    });
+    axios
+      .get<T>(url)
+      .then((data) => {
+        setState((prev) => ({
+          ...prev,
+          loading: false,
+          data: data.data,
+        }));
+      })
+      .catch((error) => {
+        setState((prev) => ({
+          ...prev,
+          loading: false,
+          date: null,
+          error: error,
+        }));
+      });
   }, [url]);
 
   return state;
