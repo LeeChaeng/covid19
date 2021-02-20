@@ -4,6 +4,8 @@ import Card from "./Card";
 
 import useAxios from "../hooks/useAxios";
 import Header from "./Header";
+import { format, formatDistanceToNow } from "date-fns";
+import { ko } from "date-fns/locale";
 
 type KoreaData = {
   updated: number;
@@ -65,6 +67,13 @@ const Status = () => {
   return (
     <Container>
       <Header />
+      {data && (
+        <div>
+          마지막 업데이트 :{" "}
+          {formatDistanceToNow(data.updated, { locale: ko, addSuffix: true })}
+        </div>
+      )}
+
       <Block>
         <Card
           title="확진자"

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Country from "./Coutry";
 import styled from "styled-components";
 import useAxios from "../hooks/useAxios";
 import { ISO } from "../static/enum";
+import { formatDistanceToNow } from "date-fns";
+import { ko } from "date-fns/locale";
 
 type CountriesData = {
   updated: number;
@@ -38,13 +40,28 @@ type CountriesData = {
 };
 
 const CountryBoard = () => {
-  const { data, loading, error } = useAxios<Array<CountriesData>>(
+  const { data } = useAxios<Array<CountriesData>>(
     "https://disease.sh/v3/covid-19/countries?sort=cases"
+  );
+
+  const lastUpdated = useMemo(
+    () =>
+      data?.reduce(
+        (prev, current) => (prev < current.updated ? current.updated : prev),
+        0
+      ),
+    [data]
   );
 
   return (
     <Block>
       <h1>전세계 확진자 수</h1>
+      {lastUpdated && (
+        <div className="updated">
+          마지막 업데이트 :{" "}
+          {formatDistanceToNow(lastUpdated, { locale: ko, addSuffix: true })}
+        </div>
+      )}
       <Wrapper>
         <Title>
           <div>
@@ -93,6 +110,9 @@ const Block = styled.div`
     margin-left: 23px;
     margin-bottom: 10px;
     font-family: "SCDream_bold";
+  }
+  & > .updated {
+    margin-left: 23px;
   }
 `;
 
