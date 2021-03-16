@@ -4,7 +4,7 @@ import Card from "./Card";
 
 import useAxios from "../hooks/useAxios";
 import Header from "./Header";
-import { format, formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale";
 
 type KoreaData = {

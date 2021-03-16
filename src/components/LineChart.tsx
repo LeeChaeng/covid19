@@ -46,7 +46,7 @@ export default function LineChart() {
 
   return (
     <ChartWrapper>
-      <h1>총 확진자수 증가 그래프</h1>
+      <h1>누적 확진자수 증가 그래프</h1>
       <Chart
         options={{
           chart: {

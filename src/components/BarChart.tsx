@@ -37,12 +37,11 @@ export default function BarChart() {
       key.push(i.substring(0, i.length - 3));
       temp_value.push(data.timeline.cases[i]);
     }
-
-    key.splice(0, 1);
     for (let i = 1; i < temp_value.length; i++) {
       value.push(temp_value[i] - temp_value[i - 1]);
     }
 
+    key.shift();
     return { key, value };
   }, [data]);
 
