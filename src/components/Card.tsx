@@ -48,7 +48,7 @@ const Block = styled.li<{ color: string }>`
   & > .today__arrow {
     position: absolute;
     top: 55%;
-    left: 13%;
+    left: 6%;
     transform: translateY(-50%);
     font-size: 13px;
     color: ${(props) => props.color};

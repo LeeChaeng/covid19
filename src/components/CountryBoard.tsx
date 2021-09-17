@@ -102,7 +102,6 @@ const CountryBoard = () => {
 };
 
 const Block = styled.div`
-  height: 200px;
   display: flex;
   flex-direction: column;
   padding-bottom: 30px;
@@ -147,7 +146,7 @@ const Title = styled.div`
 
 const Container = styled.div`
   width: 350px;
-  height: 120px;
+  height: 240px;
   font-size: 13px;
   overflow-y: scroll;
 `;
