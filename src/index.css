@@ -24,7 +24,7 @@ body {
     "나눔바른고딕 옛한글", "NanumBarunGothic YetHangul", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: white;
+  background-color: #f9fafb;
 }
 
 code {
