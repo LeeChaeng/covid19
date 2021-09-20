@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch } from "react";
 import styled from "styled-components";
 import Card from "./Card";
 
@@ -55,7 +55,11 @@ const calIncrese = (
   }
 };
 
-const Status = () => {
+interface ModalProps {
+  handleModal: Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Status = ({ handleModal }: ModalProps) => {
   const { data } = useAxios<KoreaData>(
     "https://disease.sh/v3/covid-19/countries/KR"
   );
@@ -66,7 +70,7 @@ const Status = () => {
 
   return (
     <Container>
-      <Header />
+      <Header handleModal={handleModal} />
       {data && (
         <div>
           마지막 업데이트 :{" "}
@@ -101,8 +105,6 @@ const Status = () => {
   );
 };
 
-export default Status;
-
 const Container = styled.div`
   padding: 30px;
   padding-bottom: 20px;
@@ -114,3 +116,6 @@ const Block = styled.ul`
   list-style-type: none;
   padding: 30px 0px;
 `;
+
+export default Status;
+export type { ModalProps };

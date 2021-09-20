@@ -3,15 +3,22 @@ import styled from "styled-components";
 
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ModalProps } from "./Status";
 
-const Header = () => {
+const Header = ({ handleModal }: ModalProps) => {
   return (
     <div>
       <Info>
         <Block>
           <span>위기경보</span> <Point>심각</Point>
         </Block>
-        <FontAwesomeIcon icon={faInfo} />
+        <StyledButton
+          onClick={() => {
+            handleModal(true);
+          }}
+        >
+          <FontAwesomeIcon icon={faInfo} />
+        </StyledButton>
       </Info>
       <TitleBox>
         <Title>투데이 코로나</Title>
@@ -65,4 +72,12 @@ const SubTitle = styled.div`
   margin-left: 10px;
   height: 15px;
 `;
+
+const StyledButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+`;
+
 export default Header;
+export { StyledButton };
